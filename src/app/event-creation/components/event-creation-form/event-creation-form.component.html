@@ -1,0 +1,20 @@
+<form [formGroup]="aboutFg">
+  <app-custom-input-field formControlName="titleCustom"
+                          [class.error]="isControlInvalid('titleCustom')"
+                          placeholder="write something..."
+                          label="NAME"
+                          hint="Max length 140 characters"
+                          [errorMessage]="getErrorMessageOfControl('titleCustom')">
+
+  </app-custom-input-field>
+  <br>
+  <button (click)="save()">Submit form</button>
+</form>
+
+<pre>{{ aboutFg.value | json }}</pre>
+
+
+<app-card title="About">
+
+
+</app-card>

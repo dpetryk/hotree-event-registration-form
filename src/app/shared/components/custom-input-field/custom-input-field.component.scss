@@ -1,0 +1,82 @@
+@import "~src/css/colors.scss";
+
+.dp-input-container {
+  display: flex;
+  width: 70%;
+}
+
+.dp-input-label {
+  line-height: 2.2rem;
+  margin-right: 5rem;
+  color: $color-secondary;
+}
+
+.dp-input-field {
+  flex: 1;
+  //min-width: 60%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  //width: 50%;
+  color: $color-font;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid $color-non-selected;
+  border-radius: .15rem;
+  transition: .2s ease-in-out;
+
+  &:focus {
+    color: $color-font;
+    background-color: #fff;
+    border-color: $color-secondary;
+    outline: 0;
+  }
+}
+
+.dp-validation-message {
+  position: relative;
+  bottom: -10px;
+  font-size: 0.7rem;
+  line-height: 20px;
+  text-align: center;
+  height: 20px;
+  min-width: 8rem;
+  background-color: $color-invalid;
+  color: white;
+  border-radius: .1rem;
+  margin-left: 1rem;
+}
+
+.dp-validation-message:after {
+  right: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-right-color: $color-invalid;
+  border-width: 6px;
+  margin-top: -6px;
+  transition: 0.2s;
+}
+
+.dp-hint {
+  position: relative;
+  bottom: -2px;
+  left: 123px;
+  color: $color-non-selected;
+  font-style: italic;
+  font-size: .9rem;
+}
+
+:host(.error) {
+  input {
+    border: 1px solid $color-invalid;
+  }
+}
+
+.dp-invalid {
+  color: $color-invalid;
+}

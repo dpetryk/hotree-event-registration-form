@@ -1,0 +1,21 @@
+@import "~src/css/colors";
+
+.card {
+  width: 80%;
+  background-color: #ffffff;
+  min-height: 120px;
+  border-radius: .3rem;
+  margin: auto;
+  box-shadow: 0 0 10px $color-non-selected;
+  position: relative;
+}
+
+.title {
+  display: block;
+  columns: $color-primary;
+  font-size: 2rem;
+  margin: 0 35px 0 35px;
+  line-height: 60px;
+  border-bottom: solid 1px $color-non-selected;
+  color: $color-primary;
+}

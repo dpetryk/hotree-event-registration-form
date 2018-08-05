@@ -1,0 +1,16 @@
+<div class="dp-input-container">
+  <label for="input" class="dp-input-label" [ngClass]="{'dp-invalid': errorMessage}">{{label}}</label>
+  <input class="dp-input-field"
+         type="text"
+         id="input"
+         hint="hint"
+         [value]="value"
+         (keyup)="onChange($event)"
+         (blur)="onBlur()"
+         [placeholder]="placeholder"
+         >
+  <div class="dp-validation-message" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
+</div>
+<div class="dp-hint">{{hint}}</div>
