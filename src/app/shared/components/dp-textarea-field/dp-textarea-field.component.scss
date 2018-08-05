@@ -1,23 +1,22 @@
 @import "~src/css/colors.scss";
 
-.dp-input-container {
+.dp-textarea-container {
   display: flex;
   width: 70%;
 }
 
-.dp-input-label {
+.dp-textarea-label {
   line-height: 2.2rem;
-  margin-right: 5rem;
+  width: 150px;
   color: $color-secondary;
 }
 
-.dp-input-field {
+.dp-textarea-field {
   flex: 1;
-  //min-width: 60%;
   padding: .375rem .75rem;
   font-size: 1rem;
   line-height: 1.5;
-  //width: 50%;
+  font-family: Calibri, serif;
   color: $color-font;
   background-color: #fff;
   background-clip: padding-box;
@@ -30,6 +29,10 @@
     background-color: #fff;
     border-color: $color-secondary;
     outline: 0;
+  }
+  &::placeholder {
+    color: $color-non-selected;
+    opacity: 1;
   }
 }
 
@@ -65,14 +68,14 @@
 .dp-hint {
   position: relative;
   bottom: -2px;
-  left: 123px;
+  left: 150px;
   color: $color-non-selected;
   font-style: italic;
   font-size: .9rem;
 }
 
 :host(.error) {
-  input {
+  textarea {
     border: 1px solid $color-invalid;
   }
 }

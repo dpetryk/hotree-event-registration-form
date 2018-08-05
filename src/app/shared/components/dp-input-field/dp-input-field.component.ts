@@ -2,16 +2,19 @@ import {Component, forwardRef, Input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
-  selector: 'app-custom-input-field',
-  templateUrl: './custom-input-field.component.html',
-  styleUrls: ['./custom-input-field.component.scss'],
+  selector: 'app-dp-input-field',
+  templateUrl: './dp-input-field.component.html',
+  styleUrls: ['./dp-input-field.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => CustomInputFieldComponent),
+    useExisting: forwardRef(() => DpInputFieldComponent),
     multi: true
   }]
 })
-export class CustomInputFieldComponent implements ControlValueAccessor {
+export class DpInputFieldComponent implements ControlValueAccessor {
+
+  @Input()
+  id = '';
 
   @Input()
   value = '';

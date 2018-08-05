@@ -1,0 +1,16 @@
+<div class="dp-textarea-container">
+  <label [for]="id" class="dp-textarea-label" [ngClass]="{'dp-invalid': errorMessage}">{{label}}</label>
+  <textarea class="dp-textarea-field"
+            [id]="id"
+            hint="hint"
+            [value]="value"
+            (keyup)="onChange($event)"
+            (blur)="onBlur()"
+            [placeholder]="placeholder"
+            [rows]="rows"
+  ></textarea>
+  <div class="dp-validation-message" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
+</div>
+<div class="dp-hint">{{hint}}</div>

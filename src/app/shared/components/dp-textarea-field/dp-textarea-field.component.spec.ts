@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CustomInputFieldComponent } from './custom-input-field.component';
+import { DpTextareaFieldComponent } from './dp-textarea-field.component';
 
-describe('CustomInputFieldComponent', () => {
-  let component: CustomInputFieldComponent;
-  let fixture: ComponentFixture<CustomInputFieldComponent>;
+describe('DpTextareaFieldComponent', () => {
+  let component: DpTextareaFieldComponent;
+  let fixture: ComponentFixture<DpTextareaFieldComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CustomInputFieldComponent ]
+      declarations: [ DpTextareaFieldComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CustomInputFieldComponent);
+    fixture = TestBed.createComponent(DpTextareaFieldComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

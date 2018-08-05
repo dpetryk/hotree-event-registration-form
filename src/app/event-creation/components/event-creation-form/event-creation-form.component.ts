@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {EventsService} from '../../../core/services/events.service';
 
 @Component({
   selector: 'app-event-creation-form',
@@ -11,7 +12,7 @@ export class EventCreationFormComponent implements OnInit {
   aboutFg: FormGroup;
   private formSubmitted = false;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, public eventsService: EventsService) {
   }
 
   get title() {
@@ -20,8 +21,11 @@ export class EventCreationFormComponent implements OnInit {
 
   ngOnInit() {
     this.aboutFg = this.formBuilder.group({
-      titleNative: ['', [Validators.required]],
-      titleCustom: ['', [Validators.required, Validators.pattern('[0-9]{3,}')]]
+      titleCustom: ['', Validators.required],
+      descriptionCustom: ['', Validators.required],
+      selectCustom: ['', Validators.required],
+      payment: ['', Validators.required],
+      costCustom: ['', Validators.required],
     });
   }
 
@@ -50,10 +54,10 @@ export class EventCreationFormComponent implements OnInit {
 
   save() {
     this.formSubmitted = true;
-    if (this.aboutFg.valid) {
+    // if (this.aboutFg.valid) {
       console.log(this.aboutFg.value);
-    } else {
-      console.log('form not valid');
-    }
+    // } else {
+    //   console.log('form not valid');
+    // }
   }
 }

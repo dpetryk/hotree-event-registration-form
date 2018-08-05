@@ -1,0 +1,18 @@
+<div class="dp-select-container">
+  <label [for]="id" class="dp-select-label" [ngClass]="{'dp-invalid': errorMessage}">{{label}}</label>
+  <select class="dp-select-field"
+          [id]="id"
+          hint="hint"
+          [value]="value"
+          (keyup)="onChange($event)"
+          (blur)="onBlur()"
+          (options)="options"
+  >
+    <option value="" disabled selected>Select category</option>
+    <option *ngFor="let option of options" value="{{option}}">{{option.name}}</option>
+  </select>
+  <div class="dp-validation-message" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
+</div>
+<div class="dp-hint">{{hint}}</div>

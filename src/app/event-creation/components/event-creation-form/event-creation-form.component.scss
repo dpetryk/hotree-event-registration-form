@@ -1,0 +1,71 @@
+@import "~src/css/colors";
+
+.payment-wrapper {
+  display: flex;
+  width: 70%;
+  line-height: 2.2rem;
+
+  & input {
+    position: absolute;
+    opacity: 0;
+  }
+}
+
+.payment-label {
+  line-height: 2.2rem;
+  width: 150px;
+  color: $color-secondary;
+}
+
+// -------------Custom ratio buttons-----------
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 12px;
+  margin-right: 20px;
+  cursor: pointer;
+  color: $color-font;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  height: 14px;
+  width: 14px;
+  border: solid 1px $color-secondary;
+  border-radius: 50%;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .checkmark:after {
+  top: 3px;
+  left: 3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: $color-secondary;
+}
+
+//------------------------------------------------

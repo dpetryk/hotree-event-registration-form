@@ -1,8 +1,8 @@
 <div class="dp-input-container">
-  <label for="input" class="dp-input-label" [ngClass]="{'dp-invalid': errorMessage}">{{label}}</label>
+  <label *ngIf="label" [for]="id" class="dp-input-label" [ngClass]="{'dp-invalid': errorMessage}">{{label}}</label>
   <input class="dp-input-field"
          type="text"
-         id="input"
+         [id]="id"
          hint="hint"
          [value]="value"
          (keyup)="onChange($event)"
