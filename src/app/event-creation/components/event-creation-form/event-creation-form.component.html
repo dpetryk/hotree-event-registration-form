@@ -1,5 +1,5 @@
-<app-card title="About">
-  <form [formGroup]="aboutFg">
+<form [formGroup]="aboutFg">
+  <app-card title="About">
     <app-dp-input-field formControlName="titleCustom"
                         id="title"
                         [class.error]="isControlInvalid('titleCustom')"
@@ -9,7 +9,7 @@
     </app-dp-input-field>
     <br>
 
-    <app-dp-textarea-field formcontrolname="descriptionCustom"
+    <app-dp-textarea-field formControlName="descriptionCustom"
                            id="description"
                            [class.error]="isControlInvalid('descriptionCustom')"
                            label="DESCRIPTION"
@@ -20,14 +20,14 @@
     ></app-dp-textarea-field>
     <br>
 
-    <app-dp-select-field fromControlName="selectCustom"
+    <app-dp-select-field formControlName="selectCustom"
                          id="eventCategory"
                          [class.error]="isControlInvalid('selectCustom')"
                          [options]="eventsService.getEventCategories()"
                          label="CATEGORY"
                          hint="Describes topic and people who should be interested in this event"
                          [errorMessage]="getErrorMessageOfControl('selectCustom')"
-    >
+                         placeholder="Select category">
     </app-dp-select-field>
     <br>
     <div class="payment-wrapper">
@@ -35,23 +35,88 @@
         PAYMENT
       </div>
       <label class="container">
-        <input type="radio" name="payment" value="freeEvent" checked>Free&nbsp;event<br>
+        <input type="radio" name="payment" formControlName="payment" value="freeEvent" checked>Free&nbsp;event<br>
         <span class="checkmark"></span>
       </label>
       <label class="container">
-        <input type="radio" name="payment" value="paidEvent">Paid&nbsp;event<br>
+        <input type="radio" name="payment" formControlName="payment" value="paidEvent">Paid&nbsp;event<br>
         <span class="checkmark"></span>
       </label>
       <app-dp-input-field formControlName="costCustom"
                           id="cost"
                           [class.error]="isControlInvalid('costCustom')"
                           [errorMessage]="getErrorMessageOfControl('costCustom')"
-                          placeholder="Free">
-      </app-dp-input-field>$
+                          placeholder="Fee">
+      </app-dp-input-field>
+      <div class="sidenote">$</div>
     </div>
     <br>
-    <button (click)="save()">Submit form</button>
-  </form>
+    <div class="scootch-container">
+      <app-dp-input-field formControlName="rewardCustom"
+                          id="reward"
+                          [class.error]="isControlInvalid('rewardCustom')"
+                          label="REWARD"
+                          [errorMessage]="getErrorMessageOfControl('rewardCustom')"
+                          placeholder="Number"
+                          class="field-scootch">
+      </app-dp-input-field>
+      <div class="sidenote">reward points for attendance</div>
+    </div>
 
-  <!--<pre>{{ aboutFg.value | json }}</pre>-->
-</app-card>
+  </app-card>
+
+  <app-card title="Coordinator">
+    <app-dp-select-field formControlName="responsibleCustom"
+                         id="responsible"
+                         [class.error]="isControlInvalid('responsibleCustom')"
+                         [options]="employeesService.getEmployees()"
+                         label="RESPONSIBLE"
+                         [errorMessage]="getErrorMessageOfControl('responsibleCustom')"
+                         [preselection]="employeesService.getEmployees()[2]">
+    </app-dp-select-field>
+    <br>
+
+    <app-dp-input-field formControlName="emailCustom"
+                        id="email"
+                        [class.error]="isControlInvalid('emailCustom')"
+                        label="EMAIL"
+                        [errorMessage]="getErrorMessageOfControl('emailCustom')"
+                        placeholder="Email">
+    </app-dp-input-field>
+
+  </app-card>
+
+  <app-card title="When">
+
+    <app-dp-input-field formControlName="startsOnDateCustom"
+                        type="time"
+                        id="startsOnDate"
+                        [class.error]="isControlInvalid('startsOnDateCustom')"
+                        label="STARTS ON"
+                        [errorMessage]="getErrorMessageOfControl('startsOnDateCustom')"
+                        placeholder="dd/mm/yyyy"
+    >
+    </app-dp-input-field>
+    <br>
+    <div class="scootch-container">
+      <app-dp-input-field formControlName="durationCustom"
+                          type="text"
+                          id="duration"
+                          [class.error]="isControlInvalid('durationCustom')"
+                          label="DURATION"
+                          [errorMessage]="getErrorMessageOfControl('durationCustom')"
+                          placeholder="Number"
+                          class="field-scootch">
+      </app-dp-input-field>
+      <div class="sidenote">hour</div>
+    </div>
+
+
+  </app-card>
+</form>
+
+<button class="form-submit-btn" (click)="save()">PUBLISH EVENT</button>
+
+<br>
+<pre>{{ aboutFg.value | json }}</pre>
+<br>

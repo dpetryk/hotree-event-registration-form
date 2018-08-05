@@ -5,11 +5,28 @@
           hint="hint"
           [value]="value"
           (keyup)="onChange($event)"
+          (change)="onChange($event)"
           (blur)="onBlur()"
           (options)="options"
+          placeholder="placeholder"
+          preselection="preselection"
   >
-    <option value="" disabled selected>Select category</option>
-    <option *ngFor="let option of options" value="{{option}}">{{option.name}}</option>
+
+    <optgroup *ngIf="preselection" label="Me">
+      <option value="{{preselection.id}}" selected>Me - {{preselection.name}}</option>
+    </optgroup>
+
+    <ng-template [ngIf]="!preselection" [ngIfElse]="withPreselection">
+      <option *ngIf="placeholder" disabled value="" selected>{{placeholder}}</option>
+      <option *ngFor="let option of options" value="{{option.id}}">{{option.name}}</option>
+    </ng-template>
+
+    <ng-template #withPreselection>
+      <optgroup label="Others">
+        <!--<option *ngIf="placeholder" disabled value="" selected>{{placeholder}}</option>-->
+        <option *ngFor="let option of processedOptions" value="{{option.id}}">{{option.name}}</option>
+      </optgroup>
+    </ng-template>
   </select>
   <div class="dp-validation-message" *ngIf="errorMessage">
     {{errorMessage}}

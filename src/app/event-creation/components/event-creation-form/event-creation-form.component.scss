@@ -69,3 +69,31 @@
 }
 
 //------------------------------------------------
+
+.scootch-container {
+  display: flex;
+  margin-top: 0
+}
+
+.field-scootch{
+  width: 250px
+}
+
+.sidenote{
+  line-height: 2.2rem;
+  margin-left: 10px;
+}
+
+.form-submit-btn{
+  display: block;
+  background-color: $color-accent;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.2rem;
+  height: 45px;
+  line-height: 45px;
+  width: 140px;
+  margin: 24px auto 24px auto;
+}
+
+

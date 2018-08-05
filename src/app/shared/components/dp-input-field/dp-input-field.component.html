@@ -1,11 +1,12 @@
 <div class="dp-input-container">
   <label *ngIf="label" [for]="id" class="dp-input-label" [ngClass]="{'dp-invalid': errorMessage}">{{label}}</label>
   <input class="dp-input-field"
-         type="text"
+         [type]="type"
          [id]="id"
          hint="hint"
          [value]="value"
          (keyup)="onChange($event)"
+         (change)="onChange($event)"
          (blur)="onBlur()"
          [placeholder]="placeholder"
          >

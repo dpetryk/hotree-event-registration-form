@@ -20,6 +20,9 @@ export class DpInputFieldComponent implements ControlValueAccessor {
   value = '';
 
   @Input()
+  type = '';
+
+  @Input()
   errorMessage = '';
 
   @Input()

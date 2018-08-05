@@ -1,5 +1,6 @@
 import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {Employee} from '../../../core/models/employee';
 import {EventCategory} from '../../../core/models/event-category';
 
 @Component({
@@ -12,10 +13,11 @@ import {EventCategory} from '../../../core/models/event-category';
     multi: true
   }]
 })
-export class DpSelectFieldComponent implements ControlValueAccessor {
+export class DpSelectFieldComponent implements OnInit, ControlValueAccessor {
 
   @Input()
-  options: EventCategory[];
+  options;
+  processedOptions = [];
 
   @Input()
   id = '';
@@ -32,7 +34,32 @@ export class DpSelectFieldComponent implements ControlValueAccessor {
   @Input()
   label = '';
 
+  @Input()
+  placeholder = '';
+
+  @Input()
+  preselection: Employee | EventCategory;
+
   constructor() {
+  }
+
+  ngOnInit() {
+    if (this.preselection) {
+      console.log(this.preselection);
+      this.removePreselectionFromOptions();
+    }
+  }
+
+  removePreselectionFromOptions() {
+    if (this.preselection) {
+      for (let i = 0; i < this.options.length; i++) {
+        if (this.options[i].id !== this.preselection.id) {
+          this.processedOptions.push(this.options[i]);
+        }
+      }
+    } else {
+      this.processedOptions = this.options;
+    }
   }
 
   writeValue(value: any) {

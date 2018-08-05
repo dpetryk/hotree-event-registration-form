@@ -6,8 +6,6 @@ import {EventCategory} from '../models/event-category';
 })
 export class EventsService {
 
-  // eventCategories: EventCategory[];
-
   constructor() {
   }
 
