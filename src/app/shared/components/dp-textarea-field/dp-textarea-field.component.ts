@@ -34,6 +34,11 @@ export class DpTextareaFieldComponent implements ControlValueAccessor {
   @Input()
   label = '';
 
+  @Input()
+  maxlength = '';
+
+  characters = 0;
+
   constructor() {
   }
 
@@ -46,6 +51,7 @@ export class DpTextareaFieldComponent implements ControlValueAccessor {
   onChange(event) {
     const element = event.target || event.srcElement;
     this.propagateChange(element.value);
+    this.characters = element.value.toString().length;
   }
 
   onBlur() {

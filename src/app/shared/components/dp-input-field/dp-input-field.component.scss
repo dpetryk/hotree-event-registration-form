@@ -1,8 +1,11 @@
 @import "~src/css/colors.scss";
 
 .dp-input-container {
+  margin-bottom: 25px;
+}
+
+.elem-organize-flex{
   display: flex;
-  max-width: 100%;
 }
 
 .dp-input-label {
@@ -51,7 +54,7 @@
   color: white;
   border-radius: .1rem;
   margin-left: 1rem;
-  z-index: 10;
+  //z-index: 10;
 }
 
 .dp-validation-message:after {

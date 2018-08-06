@@ -1,35 +1,38 @@
 <div class="dp-select-container">
-  <label [for]="id" class="dp-select-label" [ngClass]="{'dp-invalid': errorMessage}">{{label}}</label>
-  <select class="dp-select-field"
-          [id]="id"
-          hint="hint"
-          [value]="value"
-          (keyup)="onChange($event)"
-          (change)="onChange($event)"
-          (blur)="onBlur()"
-          (options)="options"
-          placeholder="placeholder"
-          preselection="preselection"
-  >
-
-    <optgroup *ngIf="preselection" label="Me">
-      <option value="{{preselection.id}}" selected>Me - {{preselection.name}}</option>
-    </optgroup>
-
-    <ng-template [ngIf]="!preselection" [ngIfElse]="withPreselection">
-      <option *ngIf="placeholder" disabled value="" selected>{{placeholder}}</option>
-      <option *ngFor="let option of options" value="{{option.id}}">{{option.name}}</option>
-    </ng-template>
-
-    <ng-template #withPreselection>
-      <optgroup label="Others">
-        <!--<option *ngIf="placeholder" disabled value="" selected>{{placeholder}}</option>-->
-        <option *ngFor="let option of processedOptions" value="{{option.id}}">{{option.name}}</option>
+  <div class="elem-organize-flex">
+    <label [for]="id" class="dp-select-label" [ngClass]="{'dp-invalid': errorMessage}">{{label}}</label>
+    <select class="dp-select-field"
+            [id]="id"
+            hint="hint"
+            [value]="value"
+            (keyup)="onChange($event)"
+            (change)="onChange($event)"
+            (blur)="onBlur()"
+            (options)="options"
+            placeholder="placeholder"
+            preselection="preselection"
+    >
+      <!--Select version with logged in user preselected-->
+      <optgroup *ngIf="preselection" label="Me">
+        <option value="{{preselection.id}}" selected>Me - {{preselection.name}} {{preselection.lastname}}</option>
       </optgroup>
-    </ng-template>
-  </select>
-  <div class="dp-validation-message" *ngIf="errorMessage">
-    {{errorMessage}}
+
+      <!--Select version with placeholder-->
+      <ng-template [ngIf]="!preselection" [ngIfElse]="withPreselection">
+        <!--<option *ngIf="placeholder" disabled value="" selected>{{placeholder}}</option>-->
+        <option *ngFor="let option of options" value="{{option.id}}">{{option.name}}</option>
+      </ng-template>
+
+      <!--Continue options if preselection is defined-->
+      <ng-template #withPreselection>
+        <optgroup label="Others">
+          <option *ngFor="let option of processedOptions" value="{{option.id}}">{{option.name}} {{option.lastname}}</option>
+        </optgroup>
+      </ng-template>
+    </select>
+    <div class="dp-validation-message" *ngIf="errorMessage">
+      {{errorMessage}}
+    </div>
   </div>
+  <div class="dp-hint">{{hint}}</div>
 </div>
-<div class="dp-hint">{{hint}}</div>

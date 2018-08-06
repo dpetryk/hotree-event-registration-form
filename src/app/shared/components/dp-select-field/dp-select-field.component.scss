@@ -1,8 +1,11 @@
 @import "~src/css/colors.scss";
 
 .dp-select-container {
+  margin-bottom: 25px;
+}
+
+.elem-organize-flex{
   display: flex;
-  width: 70%;
 }
 
 .dp-select-label {

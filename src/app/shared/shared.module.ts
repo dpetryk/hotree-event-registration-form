@@ -6,12 +6,13 @@ import { HeaderComponent } from './components/header/header.component';
 import { CardComponent } from './components/card/card.component';
 import { DpTextareaFieldComponent } from './components/dp-textarea-field/dp-textarea-field.component';
 import { DpSelectFieldComponent } from './components/dp-select-field/dp-select-field.component';
+import { DpDateTimeFieldComponent } from './components/dp-date-time-field/dp-date-time-field.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [DpInputFieldComponent, HeaderComponent, CardComponent, DpTextareaFieldComponent, DpSelectFieldComponent],
+  declarations: [DpInputFieldComponent, HeaderComponent, CardComponent, DpTextareaFieldComponent, DpSelectFieldComponent, DpDateTimeFieldComponent],
   exports: [
     CommonModule,
     ReactiveFormsModule,
@@ -19,6 +20,7 @@ import { DpSelectFieldComponent } from './components/dp-select-field/dp-select-f
     DpInputFieldComponent,
     DpSelectFieldComponent,
     DpTextareaFieldComponent,
+    DpDateTimeFieldComponent,
     HeaderComponent,
     CardComponent
   ]

@@ -1,21 +1,19 @@
 @import "~src/css/colors.scss";
 
-.dp-textarea-container {
-  margin-bottom: 25px;
-}
-
-.elem-organize-flex {
+.dp-date-time-container {
   display: flex;
+  max-width: 100%;
 }
 
-.dp-textarea-label {
+.dp-date-time-label {
   line-height: 2.2rem;
   width: 150px;
   color: $color-secondary;
 }
 
-.dp-textarea-field {
+.dp-date-time-field {
   flex: 1;
+  width: 40px;
   padding: .375rem .75rem;
   font-size: 1rem;
   line-height: 1.5;
@@ -33,6 +31,7 @@
     border-color: $color-secondary;
     outline: 0;
   }
+
   &::placeholder {
     color: $color-non-selected;
     opacity: 1;
@@ -51,45 +50,36 @@
   color: white;
   border-radius: .1rem;
   margin-left: 1rem;
+  z-index: 10;
 }
 
 .dp-validation-message:after {
+  position: absolute;
   right: 100%;
   top: 50%;
   border: solid transparent;
   content: " ";
   height: 0;
   width: 0;
-  position: absolute;
   pointer-events: none;
   border-right-color: $color-invalid;
   border-width: 6px;
   margin-top: -6px;
   transition: 0.2s;
-}
-
-.hints-wrapper {
-  position: relative;
-  margin-left: 150px;
-  height: .9rem;
+  z-index: 10;
 }
 
 .dp-hint {
-  float: left;
-  color: $color-non-selected;
-  font-style: italic;
-  font-size: .9rem;
-}
-
-.dp-counter {
-  float: right;
+  position: relative;
+  bottom: -2px;
+  left: 150px;
   color: $color-non-selected;
   font-style: italic;
   font-size: .9rem;
 }
 
 :host(.error) {
-  textarea {
+  input {
     border: 1px solid $color-invalid;
   }
 }

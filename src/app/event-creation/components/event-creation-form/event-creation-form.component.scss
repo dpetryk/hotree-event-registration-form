@@ -1,8 +1,7 @@
 @import "~src/css/colors";
 
-.payment-wrapper {
+.inline-wrapper {
   display: flex;
-  width: 70%;
   line-height: 2.2rem;
 
   & input {
@@ -15,6 +14,53 @@
   line-height: 2.2rem;
   width: 150px;
   color: $color-secondary;
+}
+
+.field-scootch {
+  min-width: 230px
+}
+
+.sidenote {
+  line-height: 2.2rem;
+  margin: 0 12px 0 12px;
+}
+
+.form-submit-btn {
+  display: block;
+  background-color: $color-accent;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.2rem;
+  height: 45px;
+  line-height: 45px;
+  width: 140px;
+  margin: 24px auto 24px auto;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: lighten($color-accent, 5%);
+    cursor: pointer;
+    box-shadow: 0 0 10px $color-non-selected;
+  }
+
+  &:active {
+    background-color: darken($color-accent, 10%);
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.date-field {
+  min-width: 320px;
+  flex: 1;
+}
+
+.time-field {
+  min-width: 100px;
+  flex: 1;
+  margin-right: 15px;
 }
 
 // -------------Custom ratio buttons-----------
@@ -31,12 +77,12 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
 
-.container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
+  & input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
 }
 
 .checkmark {
@@ -69,31 +115,3 @@
 }
 
 //------------------------------------------------
-
-.scootch-container {
-  display: flex;
-  margin-top: 0
-}
-
-.field-scootch{
-  width: 250px
-}
-
-.sidenote{
-  line-height: 2.2rem;
-  margin-left: 10px;
-}
-
-.form-submit-btn{
-  display: block;
-  background-color: $color-accent;
-  color: #ffffff;
-  border: none;
-  border-radius: 0.2rem;
-  height: 45px;
-  line-height: 45px;
-  width: 140px;
-  margin: 24px auto 24px auto;
-}
-
-

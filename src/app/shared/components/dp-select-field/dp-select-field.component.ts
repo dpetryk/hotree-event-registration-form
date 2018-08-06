@@ -38,7 +38,7 @@ export class DpSelectFieldComponent implements OnInit, ControlValueAccessor {
   placeholder = '';
 
   @Input()
-  preselection: Employee | EventCategory;
+  preselection: Employee;
 
   constructor() {
   }

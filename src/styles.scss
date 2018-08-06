@@ -1,8 +1,41 @@
-@import "~src/css/_reset";
+@import "css/reset";
+@import "css/breakpoints";
 @import "~src/css/colors";
+
+.main-content{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: $mobile) {
+  .main-content {
+    max-width: 540px
+  }
+}
+
+@media (min-width: $tab) {
+  .main-content {
+    max-width: 720px
+  }
+}
+
+@media (min-width: $desktop-small) {
+  .main-content {
+    max-width: 960px
+  }
+}
+
+@media (min-width: $desktop) {
+  .main-content {
+    max-width: 1040px
+  }
+}
 
 body {
   font-family: Calibri, serif;
   color: $color-font;
   background-color: $color-back;
 }
+
+
+
