@@ -7,7 +7,7 @@
   height: 18px;
 }
 
-.main-bar{
+.main-bar {
   width: 100%;
   background-color: $color-primary;
   height: 80px;
@@ -17,33 +17,42 @@
   line-height: 80px;
 }
 
-.page-title{
+.page-title {
   padding-left: 50px;
   margin-right: auto;
   margin-left: auto;
-}
-
-
-@media (min-width: $mobile) {
-  .page-title {
-    max-width: 540px
+  @media (max-width: $mobile-large) {
+    text-align: center;
+    padding-left: 0;
   }
 }
 
-@media (min-width: $tab) {
+@media (min-width: $mobile-small) {
+  .page-title {
+    max-width: 420px
+  }
+}
+
+@media (min-width: $mobile) {
+  .page-title{
+    max-width: 480px
+  }
+}
+
+@media (min-width: $mobile-large) {
   .page-title {
     max-width: 720px
   }
 }
 
-@media (min-width: $desktop-small) {
+@media (min-width: $tablet) {
   .page-title {
-    max-width: 960px
+    max-width: 760px
   }
 }
 
 @media (min-width: $desktop) {
   .page-title {
-    max-width: 1040px
+    max-width: 800px
   }
 }

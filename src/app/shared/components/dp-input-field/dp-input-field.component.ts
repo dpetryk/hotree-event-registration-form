@@ -14,7 +14,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 export class DpInputFieldComponent implements ControlValueAccessor {
 
   @Input()
-  id = '';
+  fieldId = '';
 
   @Input()
   value = '';

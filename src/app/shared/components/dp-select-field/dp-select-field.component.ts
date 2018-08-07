@@ -20,7 +20,7 @@ export class DpSelectFieldComponent implements OnInit, ControlValueAccessor {
   processedOptions = [];
 
   @Input()
-  id = '';
+  fieldId = '';
 
   @Input()
   value = '';
@@ -45,7 +45,6 @@ export class DpSelectFieldComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit() {
     if (this.preselection) {
-      console.log(this.preselection);
       this.removePreselectionFromOptions();
     }
   }

@@ -1,11 +1,11 @@
 <div class="dp-input-container">
   <div class="elem-organize-flex">
-    <label *ngIf="label" [for]="id" class="dp-input-label" [ngClass]="{'dp-invalid': errorMessage}">{{label}}</label>
+    <label *ngIf="label" [for]="fieldId" class="dp-input-label" [ngClass]="{'dp-invalid': errorMessage}">{{label}}</label>
     <input class="dp-input-field"
            [type]="type"
            [max]="max"
            [min]="min"
-           [id]="id"
+           [id]="fieldId"
            hint="hint"
            [value]="value"
            (keyup)="onChange($event)"

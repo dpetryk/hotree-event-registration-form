@@ -1,12 +1,19 @@
 @import "~src/css/colors";
+@import "~src/css/breakpoints";
 
 .inline-wrapper {
   display: flex;
   line-height: 2.2rem;
+  min-height: 63px;
+  @media (max-width: $mobile-large) {
+    flex-direction: column;
+  }
+}
 
-  & input {
-    position: absolute;
-    opacity: 0;
+.inside-wrapper {
+  width: 83%;
+  @media (max-width: $mobile-large) {
+    width: 100%;
   }
 }
 
@@ -16,13 +23,64 @@
   color: $color-secondary;
 }
 
-.field-scootch {
-  min-width: 230px
+.row-subflex {
+  display: flex;
+  flex-direction: row;
+  //align-items: flex-end;
 }
 
-.sidenote {
+.field-scootch {
+  width: 230px;
+  //@media (max-width: $mobile-large){
+  //  width: 100%;
+  //}
+}
+
+.field-scootch-more {
+  width: 70px;
+}
+
+.sidenote-fee {
   line-height: 2.2rem;
   margin: 0 12px 0 12px;
+}
+
+.sidenote-time {
+  line-height: 2.2rem;
+  margin: 0 12px 0 12px;
+  @media (max-width: $mobile-large) {
+    line-height: 2.2rem;
+    width: 150px;
+    color: $color-secondary;
+    text-transform: uppercase;
+    margin: 0 0 0 0;
+  }
+}
+
+.sidenote-reward {
+  margin: 0 12px 0 12px;
+  @media (max-width: $tablet) {
+    line-height: 1rem;
+  }
+  @media (max-width: $mobile-large) {
+    padding-top: 2.7rem;
+  }
+  @media (max-width: $mobile) {
+    padding-top: 2.3rem;
+  }
+}
+
+.sidenote-hour {
+  margin: 0 12px 0 12px;
+  //@media (max-width: $tablet) {
+  //  line-height: 1rem;
+  //}
+  @media (max-width: $mobile-large) {
+    padding-top: 2.3rem;
+  }
+  //@media (max-width: $mobile) {
+  //  padding-top: 2.3rem;
+  //}
 }
 
 .form-submit-btn {
@@ -36,6 +94,11 @@
   width: 140px;
   margin: 24px auto 24px auto;
   transition: 0.2s;
+  @media (max-width: $mobile-large) {
+    width: 300px;
+    height: 60px;
+    line-height: 60px;
+  }
 
   &:hover {
     background-color: lighten($color-accent, 5%);
@@ -53,12 +116,12 @@
 }
 
 .date-field {
-  min-width: 320px;
+  min-width: 300px;
   flex: 1;
 }
 
 .time-field {
-  min-width: 100px;
+  min-width: 50px;
   flex: 1;
   margin-right: 15px;
 }
@@ -115,3 +178,4 @@
 }
 
 //------------------------------------------------
+

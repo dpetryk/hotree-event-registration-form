@@ -1,4 +1,5 @@
 @import "~src/css/colors";
+@import "~src/css/breakpoints";
 
 .card {
   width: 100%;
@@ -18,12 +19,18 @@
   line-height: 65px;
   border-bottom: solid 1px $color-non-selected;
   color: $color-primary;
+  @media (max-width: $mobile-large) {
+    text-align: center;
+  }
 }
 
-.footer{
+.footer {
   height: 30px;
 }
 
-.content-wrapper{
+.content-wrapper {
   margin: 25px 50px 0 50px;
+  @media (max-width: $mobile-large) {
+    margin: 20px 15px 0 15px;
+  }
 }

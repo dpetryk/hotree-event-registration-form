@@ -1,11 +1,19 @@
-@import "~src/css/colors.scss";
+@import "~src/css/colors";
+@import "~src/css/breakpoints";
 
 .dp-select-container {
   margin-bottom: 25px;
+  @media (max-width: $mobile-large) {
+    margin-bottom: 5px;
+  }
 }
 
-.elem-organize-flex{
+.elem-organize-flex {
   display: flex;
+  position: relative;
+  @media (max-width: $mobile-large) {
+    flex-direction: column;
+  }
 }
 
 .dp-select-label {
@@ -16,6 +24,8 @@
 
 .dp-select-field {
   flex: 1;
+  height: 38px;
+  min-width: 40px;
   padding: .375rem .75rem;
   font-size: 1rem;
   line-height: 1.5;
@@ -45,17 +55,23 @@
 //}
 
 .dp-validation-message {
-  position: relative;
-  bottom: -10px;
+  position: absolute;
+  bottom: 10px;
+  right: -155px;
   font-size: 0.7rem;
   line-height: 20px;
   text-align: center;
   height: 20px;
-  min-width: 8rem;
+  width: 145px;
   background-color: $color-invalid;
   color: white;
   border-radius: .1rem;
   margin-left: 1rem;
+  z-index: 1;
+  @media (max-width: $mobile-large) {
+    bottom: 47px;
+    right: 0;
+  }
 }
 
 .dp-validation-message:after {
@@ -71,6 +87,12 @@
   border-width: 6px;
   margin-top: -6px;
   transition: 0.2s;
+  @media (max-width: $mobile-large) {
+    right: 5px;
+    top: 130%;
+    border-right-color: transparent;
+    border-top-color: $color-invalid;
+  }
 }
 
 .dp-hint {
@@ -80,6 +102,10 @@
   color: $color-non-selected;
   font-style: italic;
   font-size: .9rem;
+  @media (max-width: $mobile-large) {
+    left: 0;
+  }
+
 }
 
 :host(.error) {

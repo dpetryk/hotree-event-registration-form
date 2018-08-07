@@ -1,11 +1,19 @@
-@import "~src/css/colors.scss";
+@import "~src/css/colors";
+@import "~src/css/breakpoints";
 
 .dp-textarea-container {
   margin-bottom: 25px;
+  @media (max-width: $mobile-large) {
+    margin-bottom: 5px;
+  }
 }
 
 .elem-organize-flex {
   display: flex;
+  position: relative;
+  @media (max-width: $mobile-large) {
+    flex-direction: column;
+  }
 }
 
 .dp-textarea-label {
@@ -16,6 +24,7 @@
 
 .dp-textarea-field {
   flex: 1;
+  min-width: 40px;
   padding: .375rem .75rem;
   font-size: 1rem;
   line-height: 1.5;
@@ -26,6 +35,7 @@
   border: 1px solid $color-non-selected;
   border-radius: .15rem;
   transition: .2s ease-in-out;
+  resize: none;
 
   &:focus {
     color: $color-font;
@@ -40,17 +50,22 @@
 }
 
 .dp-validation-message {
-  position: relative;
-  bottom: -10px;
+  position: absolute;
+  bottom: 114px;
+  right: -155px;
   font-size: 0.7rem;
   line-height: 20px;
   text-align: center;
   height: 20px;
-  min-width: 8rem;
+  width: 145px;
   background-color: $color-invalid;
   color: white;
   border-radius: .1rem;
   margin-left: 1rem;
+  @media (max-width: $mobile-large){
+    bottom: 143px;
+    right: 0;
+  }
 }
 
 .dp-validation-message:after {
@@ -66,12 +81,21 @@
   border-width: 6px;
   margin-top: -6px;
   transition: 0.2s;
+  @media (max-width: $mobile-large) {
+    right: 5px;
+    top: 130%;
+    border-right-color: transparent;
+    border-top-color: $color-invalid;
+  }
 }
 
 .hints-wrapper {
   position: relative;
   margin-left: 150px;
   height: .9rem;
+  @media (max-width: $mobile-large) {
+    margin-left: 0;
+  }
 }
 
 .dp-hint {

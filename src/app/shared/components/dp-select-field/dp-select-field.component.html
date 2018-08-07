@@ -1,8 +1,8 @@
 <div class="dp-select-container">
   <div class="elem-organize-flex">
-    <label [for]="id" class="dp-select-label" [ngClass]="{'dp-invalid': errorMessage}">{{label}}</label>
+    <label [for]="fieldId" class="dp-select-label" [ngClass]="{'dp-invalid': errorMessage}">{{label}}</label>
     <select class="dp-select-field"
-            [id]="id"
+            [id]="fieldId"
             hint="hint"
             [value]="value"
             (keyup)="onChange($event)"
