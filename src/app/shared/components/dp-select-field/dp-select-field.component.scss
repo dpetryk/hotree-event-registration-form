@@ -43,16 +43,14 @@
     border-color: $color-secondary;
     outline: 0;
   }
-  &::placeholder {
-    color: $color-non-selected;
-    opacity: 1;
-  }
-
+}
+option:disabled {
+  color: $color-non-selected;
 }
 
-//.placeholder-select-item {
-//  color: $color-non-selected;
-//}
+.mark-required {
+  color: $color-invalid;
+}
 
 .dp-validation-message {
   position: absolute;
@@ -97,7 +95,7 @@
 
 .dp-hint {
   position: relative;
-  bottom: -2px;
+  bottom: -1px;
   left: 150px;
   color: $color-non-selected;
   font-style: italic;

@@ -49,6 +49,10 @@
   }
 }
 
+.mark-required {
+  color: $color-invalid;
+}
+
 .dp-validation-message {
   position: absolute;
   bottom: 114px;
@@ -62,7 +66,7 @@
   color: white;
   border-radius: .1rem;
   margin-left: 1rem;
-  @media (max-width: $mobile-large){
+  @media (max-width: $mobile-large) {
     bottom: 143px;
     right: 0;
   }
@@ -93,6 +97,7 @@
   position: relative;
   margin-left: 150px;
   height: .9rem;
+  bottom: -1px;
   @media (max-width: $mobile-large) {
     margin-left: 0;
   }

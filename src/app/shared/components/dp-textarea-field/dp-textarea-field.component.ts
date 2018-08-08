@@ -35,6 +35,9 @@ export class DpTextareaFieldComponent implements ControlValueAccessor {
   label = '';
 
   @Input()
+  required: boolean;
+
+  @Input()
   maxlength = '';
 
   characters = 0;

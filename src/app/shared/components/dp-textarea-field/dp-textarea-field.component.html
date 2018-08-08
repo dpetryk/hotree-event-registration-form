@@ -1,8 +1,13 @@
 <div class="dp-textarea-container">
   <div class="elem-organize-flex">
-    <label [for]="fieldId" class="dp-textarea-label" [ngClass]="{'dp-invalid': errorMessage}">{{label}}</label>
+    <label [for]="fieldId" class="dp-textarea-label" [ngClass]="{'dp-invalid': errorMessage}">{{label}}
+      <span *ngIf="required" class="mark-required">
+        *
+      </span>
+    </label>
     <textarea class="dp-textarea-field"
               [id]="fieldId"
+              [required]="required"
               hint="hint"
               [value]="value"
               (keyup)="onChange($event)"

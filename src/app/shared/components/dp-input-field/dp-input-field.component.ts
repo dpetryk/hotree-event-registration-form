@@ -40,6 +40,9 @@ export class DpInputFieldComponent implements ControlValueAccessor {
   @Input()
   label = '';
 
+  @Input()
+  required: boolean;
+
   constructor() {
   }
 

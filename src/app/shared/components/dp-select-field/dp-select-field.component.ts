@@ -35,6 +35,9 @@ export class DpSelectFieldComponent implements OnInit, ControlValueAccessor {
   label = '';
 
   @Input()
+  required: boolean;
+
+  @Input()
   placeholder = '';
 
   @Input()

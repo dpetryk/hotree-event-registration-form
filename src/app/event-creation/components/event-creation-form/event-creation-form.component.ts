@@ -3,15 +3,18 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {EventsService} from '../../../core/services/events.service';
 import {EmployeesService} from '../../../core/services/employees.service';
 import {Router} from '@angular/router';
+import moment from 'moment-es6';
 
 @Component({
   selector: 'app-event-creation-form',
   templateUrl: './event-creation-form.component.html',
-  styleUrls: ['./event-creation-form.component.scss' ]
+  styleUrls: ['./event-creation-form.component.scss']
 })
 export class EventCreationFormComponent implements OnInit {
 
-  fg: FormGroup;
+  aboutFg: FormGroup;
+  coordinatorFg: FormGroup;
+  whenFg: FormGroup;
   formSubmitted = false;
   paidEvent = false;
 
@@ -22,20 +25,23 @@ export class EventCreationFormComponent implements OnInit {
     private router: Router) {
   }
 
-
   ngOnInit() {
-    this.fg = this.formBuilder.group({
+    this.aboutFg = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', [Validators.required, Validators.maxLength]],
       category_id: [''],
       paid_event: [''],
       event_fee: ['', [Validators.pattern('^[-.0-9]+$'), Validators.min(0.01)]],
       reward: ['', Validators.pattern('^[-.0-9]+$')],
+    });
+    this.coordinatorFg = this.formBuilder.group({
       coordinator: ['', Validators.required],
       email: ['', Validators.pattern(
         '^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}' +
         '[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$')],
-      date: ['', Validators.required],
+    });
+      this.whenFg = this.formBuilder.group({
+      date: ['', [this.checkIfFutureDate, Validators.required,]],
       time: ['', [Validators.required,
         Validators.pattern('^((0[0-9])|(1[0-2])):([0-5][0-9])$')]], // Meridian time value pattern
       duration: ['', Validators.pattern('^[-.0-9]+$')],
@@ -45,27 +51,27 @@ export class EventCreationFormComponent implements OnInit {
 
   eventIsPaid() {
     this.paidEvent = true;
-    this.fg.get('event_fee').setValidators([
+    this.event_fee.setValidators([
       Validators.required,
       Validators.pattern('^[-.0-9]+$'),
       Validators.min(0.01)]);
-    this.fg.get('event_fee').updateValueAndValidity();
+    this.event_fee.updateValueAndValidity();
   }
 
   eventIsFree() {
     this.paidEvent = false;
-    this.fg.get('event_fee').clearValidators();
-    this.fg.get('event_fee').updateValueAndValidity();
+    this.event_fee.clearValidators();
+    this.event_fee.updateValueAndValidity();
   }
 
   isControlInvalid(controlName): boolean {
-    const control: AbstractControl = this.fg.get(controlName);
+    const control: AbstractControl = controlName;
     return control.invalid && (control.touched || this.formSubmitted);
   }
 
-  getErrorMessageOfControl(controlName): string {
-    const control: AbstractControl = this.fg.get(controlName);
-    if (this.isControlInvalid(controlName)) {
+  getErrorMessageOfControl(control): string {
+    // const control: AbstractControl = control;
+    if (this.isControlInvalid(control)) {
       const errors = control.errors;
       if (errors.required) {
         return 'Field cannot be empty';
@@ -79,53 +85,58 @@ export class EventCreationFormComponent implements OnInit {
       if (errors.min) {
         return 'Must be more than zero';
       }
+      if (errors.pastDate) {
+        return 'Must be future date';
+      }
     }
-
     return '';
   }
 
-  formatCasing(str: string) { // labels are in all caps so need to format properly
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  // custom validator comparing date to today
+  checkIfFutureDate(c: AbstractControl): { [key: string]: boolean } | null {
+    if (moment(c.value) < moment()) {
+      return {'pastDate': true}
+    }
+    return null
   }
 
   save() {
     this.formSubmitted = true;
-    if (this.fg.valid) {
+    if ((this.aboutFg.valid) && (this.coordinatorFg.valid) && (this.whenFg.valid)) {
       console.log(this.formatFormInput());
       this.router.navigate(['/event-creation-form/success']);
 
     } else {
       console.log('Form not valid');
-      console.log(this.formatFormInput());
     }
   }
 
   formatFormInput() {
     return {
-      title: this.fg.get('title').value,
-      description: this.fg.get('description').value,
-      category_id: this.fg.get('category_id').value,
-      paid_event: (this.fg.get('paid_event').value === 'true'),
-      event_fee: parseFloat(parseFloat(this.fg.get('event_fee').value).toFixed(2)),
-      reward: parseFloat(parseFloat(this.fg.get('reward').value).toFixed(2)),
+      title: this.title.value,
+      description: this.description.value,
+      category_id: this.category_id.value,
+      paid_event: (this.paid_event.value === 'true'),
+      event_fee: parseFloat(parseFloat(this.event_fee.value).toFixed(2)),
+      reward: parseFloat(parseFloat(this.reward.value).toFixed(2)),
       date: this.formatDateAndTime(),
-      duration: parseFloat(parseFloat(this.fg.get('duration').value).toFixed(2)) * 3600,
+      duration: parseFloat(parseFloat(this.duration.value).toFixed(2)) * 3600,
       coordinator: {
-        email: this.fg.get('email').value,
-        id: this.fg.get('coordinator').value,
+        email: this.email.value,
+        id: this.coordinator.value,
       }
     };
   }
 
   formatDateAndTime(): string {
-    const date = this.fg.get('date').value;
-    let time = this.fg.get('time').value;
-    let hours = parseInt((this.fg.get('time').value).toString().substr(0, 2), 10);
-    const minutes = this.fg.get('time').value.toString().substr(3, 2);
-    if ((this.fg.get('meridian').value === 'pm') && (hours !== 12)) {
+    const date = this.date.value;
+    let time = this.time.value;
+    let hours = parseInt((this.time.value).toString().substr(0, 2), 10);
+    const minutes = this.time.value.toString().substr(3, 2);
+    if ((this.meridian.value === 'pm') && (hours !== 12)) {
       hours += 12;
     }
-    if ((this.fg.get('meridian').value === 'am') && (hours === 12)) {
+    if ((this.meridian.value === 'am') && (hours === 12)) {
       hours -= 12;
     }
     time = (hours < 10) ? ('0' + hours.toString() + ':' + minutes) : hours.toString() + ':' + minutes;
@@ -135,12 +146,55 @@ export class EventCreationFormComponent implements OnInit {
   // ----------------------Form-control-getters--------------------
 
   get title() {
-    return this.fg.get('title');
+    return this.aboutFg.get('title');
   }
 
   get description() {
-    return this.fg.get('description');
+    return this.aboutFg.get('description');
   }
 
+  get category_id() {
+    return this.aboutFg.get('category_id');
+  }
+
+  get paid_event() {
+    return this.aboutFg.get('paid_event');
+  }
+
+  get event_fee() {
+    return this.aboutFg.get('event_fee');
+  }
+
+  get reward() {
+    return this.aboutFg.get('reward');
+  }
+
+  get date() {
+    return this.whenFg.get('date');
+  }
+
+  get time() {
+    return this.whenFg.get('time');
+  }
+
+  get meridian() {
+    return this.whenFg.get('meridian');
+  }
+
+  get duration() {
+    return this.whenFg.get('duration');
+  }
+
+  get coordinator() {
+    return this.coordinatorFg.get('coordinator');
+  }
+
+  get email() {
+    return this.coordinatorFg.get('email');
+  }
+
+  get id() {
+    return this.coordinatorFg.get('id');
+  }
 
 }

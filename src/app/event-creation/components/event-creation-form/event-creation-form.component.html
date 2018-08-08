@@ -1,166 +1,171 @@
 <div class="main-content">
-  <form [formGroup]="fg">
-    <app-card title="About">
-      <div class="inside-wrapper">
-        <app-dp-input-field formControlName="title"
-                            fieldId="title"
-                            [class.error]="isControlInvalid('title')"
-                            label="TITLE"
-                            [errorMessage]="getErrorMessageOfControl('title')"
-                            placeholder="Make it short and clear">
-        </app-dp-input-field>
-
-        <app-dp-textarea-field formControlName="description"
-                               fieldId="description"
-                               [class.error]="isControlInvalid('description')"
-                               label="DESCRIPTION"
-                               hint="Max length 140 characters"
-                               [errorMessage]="getErrorMessageOfControl('description')"
-                               placeholder="Write about your event, be creative"
-                               rows="5"
-                               maxlength="140"
-        ></app-dp-textarea-field>
-
-        <app-dp-select-field formControlName="category_id"
-                             fieldId="category_id"
-                             [class.error]="isControlInvalid('category_id')"
-                             [options]="eventsService.getEventCategories()"
-                             label="CATEGORY"
-                             hint="Describes topic and people who should be interested in this event"
-                             [errorMessage]="getErrorMessageOfControl('category_id')">
-        </app-dp-select-field>
-
-        <div class="inline-wrapper">
-          <div class="payment-label">
-            PAYMENT
-          </div>
-          <div class="row-subflex">
-            <label class="container" for="free">
-              <input type="radio"
-                     name="paid_event"
-                     id="free"
-                     formControlName="paid_event"
-                     value="false"
-                     (click)="eventIsFree()"
-                     checked
-              >Free&nbsp;event<br>
-              <span class="checkmark"></span>
-            </label>
-            <label class="container" for="paid">
-              <input type="radio"
-                     name="paid_event"
-                     id="paid"
-                     formControlName="paid_event"
-                     value="true"
-                     (click)="eventIsPaid()"
-              >Paid&nbsp;event<br>
-              <span class="checkmark"></span>
-            </label>
-
-            <app-dp-input-field formControlName="event_fee"
-                                fieldId="event_fee"
-                                [class.error]="isControlInvalid('event_fee')"
-                                [errorMessage]="getErrorMessageOfControl('event_fee')"
-                                placeholder="Fee"
-                                class="field-scootch-more invisible"
-                                [ngClass]="{'visible': paidEvent}"
-            >
-            </app-dp-input-field>
-            <div class="sidenote-fee invisible" [ngClass]="{'visible': paidEvent}">$</div>
-          </div>
-        </div>
-        <div class="inline-wrapper">
-          <div class="row-subflex">
-            <app-dp-input-field formControlName="reward"
-                                fieldId="reward"
-                                [class.error]="isControlInvalid('reward')"
-                                label="REWARD"
-                                [errorMessage]="getErrorMessageOfControl('reward')"
-                                placeholder="Number"
-                                class="field-scootch">
-            </app-dp-input-field>
-            <div class="sidenote-reward">reward points for attendance</div>
-          </div>
-        </div>
-      </div>
-    </app-card>
-
-    <app-card title="Coordinator">
-      <div class="inside-wrapper">
-        <app-dp-select-field formControlName="coordinator"
-                             id="coordinator"
-                             [class.error]="isControlInvalid('coordinator')"
-                             [options]="employeesService.getEmployees()"
-                             label="RESPONSIBLE"
-                             [errorMessage]="getErrorMessageOfControl('coordinator')"
-                             [preselection]="employeesService.getLoggedEmployee()">
-        </app-dp-select-field>
-
-        <app-dp-input-field formControlName="email"
-                            fieldId="email"
-                            [class.error]="isControlInvalid('email')"
-                            label="EMAIL"
-                            [errorMessage]="getErrorMessageOfControl('email')"
-                            placeholder="Email">
-        </app-dp-input-field>
-      </div>
-    </app-card>
-
-    <app-card title="When">
-      <div class="inside-wrapper">
-        <div class="inline-wrapper">
-          <app-dp-input-field formControlName="date"
-                              fieldId="date"
-                              type="date"
-                              [class.error]="isControlInvalid('date')"
-                              label="STARTS ON"
-                              [errorMessage]="getErrorMessageOfControl('date')"
-                              class="date-field">
+  <form (ngSubmit)="save()">
+    <div [formGroup]="aboutFg">
+      <app-card title="About">
+        <div class="inside-wrapper">
+          <app-dp-input-field formControlName="title"
+                              [fieldId]="title"
+                              [required]="true"
+                              [class.error]="isControlInvalid(title)"
+                              label="TITLE"
+                              [errorMessage]="getErrorMessageOfControl(title)"
+                              placeholder="Make it short and clear">
           </app-dp-input-field>
-          <div class="sidenote-time">at</div>
-          <div class="row-subflex">
-            <app-dp-input-field formControlName="time"
-                                fieldId="time"
-                                type="time"
-                                max="12:00"
-                                min="01:00"
-                                [class.error]="isControlInvalid('time')"
-                                [errorMessage]="getErrorMessageOfControl('time')"
-                                class="time-field">
-            </app-dp-input-field>
 
-            <label class="container" for="am">
-              <input type="radio" name="meridian" id="am" formControlName="meridian" value="am" checked>AM<br>
-              <span class="checkmark"></span>
-            </label>
-            <label class="container" for="pm">
-              <input type="radio" name="meridian" id="pm" formControlName="meridian" value="pm">PM<br>
-              <span class="checkmark"></span>
-            </label>
+          <app-dp-textarea-field formControlName="description"
+                                 fieldId="description"
+                                 [required]="true"
+                                 [class.error]="isControlInvalid(description)"
+                                 label="DESCRIPTION"
+                                 hint="Max length 140 characters"
+                                 [errorMessage]="getErrorMessageOfControl(description)"
+                                 placeholder="Write about your event, be creative"
+                                 rows="5"
+                                 maxlength="140"
+          ></app-dp-textarea-field>
+
+          <app-dp-select-field formControlName="category_id"
+                               fieldId="category_id"
+                               [class.error]="isControlInvalid(category_id)"
+                               [options]="eventsService.getEventCategories()"
+                               label="CATEGORY"
+                               hint="Describes topic and people who should be interested in this event"
+                               [errorMessage]="getErrorMessageOfControl(category_id)"
+                               placeholder="Select category">
+          </app-dp-select-field>
+
+          <div class="inline-wrapper">
+            <div class="payment-label">
+              PAYMENT
+            </div>
+            <div class="row-subflex">
+              <label class="container" for="free">
+                <input type="radio"
+                       name="paid_event"
+                       id="free"
+                       formControlName="paid_event"
+                       value="false"
+                       (click)="eventIsFree()"
+                       checked
+                >Free&nbsp;event<br>
+                <span class="checkmark"></span>
+              </label>
+              <label class="container" for="paid">
+                <input type="radio"
+                       name="paid_event"
+                       id="paid"
+                       formControlName="paid_event"
+                       value="true"
+                       (click)="eventIsPaid()"
+                >Paid&nbsp;event<br>
+                <span class="checkmark"></span>
+              </label>
+
+              <app-dp-input-field formControlName="event_fee"
+                                  fieldId="event_fee"
+                                  [class.error]="isControlInvalid(event_fee)"
+                                  [errorMessage]="getErrorMessageOfControl(event_fee)"
+                                  placeholder="Fee"
+                                  class="field-scootch-more invisible"
+                                  [ngClass]="{'visible': paidEvent}"
+              >
+              </app-dp-input-field>
+              <div class="sidenote-fee invisible" [ngClass]="{'visible': paidEvent}">$</div>
+            </div>
+          </div>
+          <div class="inline-wrapper">
+            <div class="row-subflex">
+              <app-dp-input-field formControlName="reward"
+                                  fieldId="reward"
+                                  [class.error]="isControlInvalid(reward)"
+                                  label="REWARD"
+                                  [errorMessage]="getErrorMessageOfControl(reward)"
+                                  placeholder="Number"
+                                  class="field-scootch">
+              </app-dp-input-field>
+              <div class="sidenote-reward">reward points for attendance</div>
+            </div>
           </div>
         </div>
-        <div class="inline-wrapper">
-          <div class="row-subflex">
-            <app-dp-input-field formControlName="duration"
-                                type="text"
-                                fieldId="duration"
-                                [class.error]="isControlInvalid('duration')"
-                                label="DURATION"
-                                [errorMessage]="getErrorMessageOfControl('duration')"
-                                placeholder="Number"
-                                class="field-scootch">
+      </app-card>
+    </div>
+    <div [formGroup]="coordinatorFg">
+      <app-card title="Coordinator">
+        <div class="inside-wrapper">
+          <app-dp-select-field formControlName="coordinator"
+                               id="coordinator"
+                               [required]="true"
+                               [class.error]="isControlInvalid(coordinator)"
+                               [options]="employeesService.getEmployees()"
+                               label="RESPONSIBLE"
+                               [errorMessage]="getErrorMessageOfControl(coordinator)"
+                               [preselection]="employeesService.getLoggedEmployee()">
+          </app-dp-select-field>
+
+          <app-dp-input-field formControlName="email"
+                              fieldId="email"
+                              [class.error]="isControlInvalid(email)"
+                              label="EMAIL"
+                              [errorMessage]="getErrorMessageOfControl(email)"
+                              placeholder="Email">
+          </app-dp-input-field>
+        </div>
+      </app-card>
+    </div>
+
+    <div [formGroup]="whenFg">
+      <app-card title="When">
+        <div class="inside-wrapper">
+          <div class="inline-wrapper">
+            <app-dp-input-field formControlName="date"
+                                fieldId="date"
+                                type="date"
+                                [required]="true"
+                                [class.error]="isControlInvalid(date)"
+                                label="STARTS ON"
+                                [errorMessage]="getErrorMessageOfControl(date)"
+                                class="date-field">
             </app-dp-input-field>
-            <div class="sidenote-hour">hour</div>
+            <div class="sidenote-time">at</div>
+            <div class="row-subflex">
+              <app-dp-input-field formControlName="time"
+                                  fieldId="time"
+                                  type="time"
+                                  max="12:00"
+                                  min="01:00"
+                                  [class.error]="isControlInvalid(time)"
+                                  [errorMessage]="getErrorMessageOfControl(time)"
+                                  class="time-field">
+              </app-dp-input-field>
+
+              <label class="container" for="am">
+                <input type="radio" name="meridian" id="am" formControlName="meridian" value="am" checked>AM<br>
+                <span class="checkmark"></span>
+              </label>
+              <label class="container" for="pm">
+                <input type="radio" name="meridian" id="pm" formControlName="meridian" value="pm">PM<br>
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="inline-wrapper">
+            <div class="row-subflex">
+              <app-dp-input-field formControlName="duration"
+                                  type="text"
+                                  fieldId="duration"
+                                  [class.error]="isControlInvalid(duration)"
+                                  label="DURATION"
+                                  [errorMessage]="getErrorMessageOfControl(duration)"
+                                  placeholder="Number"
+                                  class="field-scootch">
+              </app-dp-input-field>
+              <div class="sidenote-hour">hour</div>
+            </div>
           </div>
         </div>
-      </div>
-    </app-card>
+      </app-card>
+    </div>
+    <button class="form-submit-btn" type="submit">PUBLISH EVENT</button>
   </form>
-
-  <button class="form-submit-btn" (click)="save()">PUBLISH EVENT</button>
-
-  <br>
-  <pre>{{ fg.value | json }}</pre>
-
   <br>
 </div>

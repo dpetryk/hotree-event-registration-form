@@ -1,8 +1,13 @@
 <div class="dp-select-container">
   <div class="elem-organize-flex">
-    <label [for]="fieldId" class="dp-select-label" [ngClass]="{'dp-invalid': errorMessage}">{{label}}</label>
+    <label [for]="fieldId" class="dp-select-label" [ngClass]="{'dp-invalid': errorMessage}">{{label}}
+      <span *ngIf="required" class="mark-required">
+        *
+      </span>
+    </label>
     <select class="dp-select-field"
             [id]="fieldId"
+            [required]="required"
             hint="hint"
             [value]="value"
             (keyup)="onChange($event)"
@@ -14,12 +19,12 @@
     >
       <!--Select version with logged in user preselected-->
       <optgroup *ngIf="preselection" label="Me">
-        <option value="{{preselection.id}}" selected>Me - {{preselection.name}} {{preselection.lastname}}</option>
+        <option value="{{preselection.id}}">Me - {{preselection.name}} {{preselection.lastname}}</option>
       </optgroup>
 
       <!--Select version with placeholder-->
       <ng-template [ngIf]="!preselection" [ngIfElse]="withPreselection">
-        <!--<option *ngIf="placeholder" disabled value="" selected>{{placeholder}}</option>-->
+        <option *ngIf="placeholder" disabled value="">{{placeholder}}</option>
         <option *ngFor="let option of options" value="{{option.id}}">{{option.name}}</option>
       </ng-template>
 

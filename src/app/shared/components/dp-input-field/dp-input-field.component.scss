@@ -44,11 +44,14 @@
       border-color: $color-secondary;
       outline: 0;
     }
-
     &::placeholder {
       color: $color-non-selected;
       opacity: 1;
     }
+  }
+
+  .mark-required {
+    color: $color-invalid;
   }
 
   .dp-validation-message {
@@ -95,11 +98,15 @@
 
   .dp-hint {
     position: relative;
-    bottom: -2px;
+    bottom: 24px;
     left: 150px;
     color: $color-non-selected;
     font-style: italic;
     font-size: .9rem;
+    @media (max-width: $mobile-large) {
+      left: 0;
+      bottom: 3px;
+    }
   }
 
   :host(.error) {
