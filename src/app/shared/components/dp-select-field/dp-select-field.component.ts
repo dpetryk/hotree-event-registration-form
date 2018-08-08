@@ -92,9 +92,9 @@ export class DpSelectFieldComponent implements OnInit, ControlValueAccessor {
   }
 
   private onTouchedCallback = () => {
-  };
+  }
 
   private propagateChange = (_: any) => {
-  };
+  }
 }
 

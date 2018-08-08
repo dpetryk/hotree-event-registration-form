@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+
 import {EventsService} from '../../../core/services/events.service';
 import {EmployeesService} from '../../../core/services/employees.service';
-import {Router} from '@angular/router';
 import moment from 'moment-es6';
 
 @Component({
@@ -40,10 +41,10 @@ export class EventCreationFormComponent implements OnInit {
         '^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}' +
         '[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$')],
     });
-      this.whenFg = this.formBuilder.group({
-      date: ['', [this.checkIfFutureDate, Validators.required,]],
+    this.whenFg = this.formBuilder.group({
+      date: ['', [this.checkIfFutureDate, Validators.required, ]],
       time: ['', [Validators.required,
-        Validators.pattern('^((0[0-9])|(1[0-2])):([0-5][0-9])$')]], // Meridian time value pattern
+        Validators.pattern('^((0[1-9])|(1[0-2])):([0-5][0-9])$')]], // Meridian time value pattern
       duration: ['', Validators.pattern('^[-.0-9]+$')],
       meridian: [''],
     });
@@ -51,11 +52,12 @@ export class EventCreationFormComponent implements OnInit {
 
   eventIsPaid() {
     this.paidEvent = true;
+    this.event_fee.markAsPristine();
     this.event_fee.setValidators([
       Validators.required,
       Validators.pattern('^[-.0-9]+$'),
       Validators.min(0.01)]);
-    this.event_fee.updateValueAndValidity();
+  this.event_fee.updateValueAndValidity();
   }
 
   eventIsFree() {
@@ -95,9 +97,9 @@ export class EventCreationFormComponent implements OnInit {
   // custom validator comparing date to today
   checkIfFutureDate(c: AbstractControl): { [key: string]: boolean } | null {
     if (moment(c.value) < moment()) {
-      return {'pastDate': true}
+      return {'pastDate': true};
     }
-    return null
+    return null;
   }
 
   save() {
@@ -105,7 +107,6 @@ export class EventCreationFormComponent implements OnInit {
     if ((this.aboutFg.valid) && (this.coordinatorFg.valid) && (this.whenFg.valid)) {
       console.log(this.formatFormInput());
       this.router.navigate(['/event-creation-form/success']);
-
     } else {
       console.log('Form not valid');
     }
@@ -117,7 +118,7 @@ export class EventCreationFormComponent implements OnInit {
       description: this.description.value,
       category_id: this.category_id.value,
       paid_event: (this.paid_event.value === 'true'),
-      event_fee: parseFloat(parseFloat(this.event_fee.value).toFixed(2)),
+      event_fee: (this.paidEvent) ? parseFloat(parseFloat(this.event_fee.value).toFixed(2)) : 0,
       reward: parseFloat(parseFloat(this.reward.value).toFixed(2)),
       date: this.formatDateAndTime(),
       duration: parseFloat(parseFloat(this.duration.value).toFixed(2)) * 3600,

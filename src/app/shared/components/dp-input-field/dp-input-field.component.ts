@@ -74,8 +74,8 @@ export class DpInputFieldComponent implements ControlValueAccessor {
   }
 
   private onTouchedCallback = () => {
-  };
+  }
 
   private propagateChange = (_: any) => {
-  };
+  }
 }
