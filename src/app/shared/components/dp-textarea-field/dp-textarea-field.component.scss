@@ -69,6 +69,7 @@
   @media (max-width: $mobile-large) {
     bottom: 143px;
     right: 0;
+    width: 145px;
   }
 }
 
@@ -107,14 +108,14 @@
   float: left;
   color: $color-non-selected;
   font-style: italic;
-  font-size: .9rem;
+  font-size: .7rem;
 }
 
 .dp-counter {
   float: right;
   color: $color-non-selected;
   font-style: italic;
-  font-size: .9rem;
+  font-size: .7rem;
 }
 
 :host(.error) {

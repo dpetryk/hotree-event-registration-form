@@ -71,6 +71,7 @@
     @media (max-width: $mobile-large){
       bottom: 47px;
       right: 0;
+      width: 145px;
     }
   }
 
@@ -102,7 +103,7 @@
     left: 150px;
     color: $color-non-selected;
     font-style: italic;
-    font-size: .9rem;
+    font-size: .7rem;
     @media (max-width: $mobile-large) {
       left: 0;
       bottom: 3px;
